@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="form-group row">
+      <label for="stockTicker" class="col-sm-2 col-form-label">Stock Ticker</label>
+      <div class="col-sm-5">
+        <input #ticker class="form-control" id="stockTicker" ([ngModel])="selectedStock"
+               placeholder="Enter The Stock Ticker (e.g. GOOG)" (keyup)="getStockData(ticker.value)">
+        <span class="badge badge-primary">{{selectedStock?.disp_name}}</span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="stockPrice" class="col-sm-2 col-form-label">Stock Price</label>
+      <div class="col-sm-5">
+        <input #stockPrice readonly type="number" class="form-control" id="stockPrice" [value]="selectedStock?.last_price">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="stockShares" class="col-sm-2 col-form-label">Number of Shares</label>
+      <div class="col-sm-5">
+        <input #numShares type="number" ([ngModel])="numberOfShares" class="form-control" id="stockShares"
+               (keyup)="computeTotalAmount()">
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="brokerFees" class="col-sm-2 col-form-label">Broker Fees <span class="badge badge-info"> (2.5%)</span></label>
+      <div class="col-sm-5">
+        <input readonly type="number" #brokerfee [value]="numShares.value * stockPrice * 0.025"  class="form-control" id="brokerFees">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="totalAmount" class="col-sm-2 col-form-label">Total Amount</label>
+      <div class="col-sm-5">
+        <input readonly type="number" [(ngModel)]="totalAmount" class="form-control" id="totalAmount">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <button type="submit" (click)="addStock(ticker.value)" class="btn btn-primary">Order</button>
+        <button type="cancel" (click)="selectedStock = null; ticker.value=''" class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+
+  <hr>
+  <br />
+
+  <h2>List of Stocks</h2>
+
+  <li *ngFor="let stock of stocks">
+  {{stock}}
+  </li>
+</div>

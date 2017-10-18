@@ -1,0 +1,24 @@
+<div class="container">
+
+
+  <label for="account-balance">Current Balance: </label>
+  <div class="input-group">
+    <span class="input-group-addon" id="account-balance">$</span>
+    <input type="number" readonly [(ngModel)]="currentBalance" aria-label="current-balance" aria-describedby="current-balance">
+  </div>
+  <br>
+
+  <label for="account-balance">Add Fund: </label>
+  <div class="input-group">
+    <span class="input-group-addon" id="add-balance">$</span>
+    <input type="number" placeholder="Amount to be Added" [(ngModel)]="topUpAmount" aria-label="add-balance" aria-describedby="add-balance">
+  </div>
+
+  <br />
+  <br />
+  <button type="button" class="btn btn-primary" (click)="addFund(topUpAmount)">Add Fund</button>
+
+  <br />
+
+
+</div>
